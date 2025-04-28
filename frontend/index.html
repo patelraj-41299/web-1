@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Info Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Employee Information</h1>
+    <form id="employeeForm">
+      <input type="text" id="name" name="name" placeholder="Employee Name" required>
+      <input type="text" id="info" name="info" placeholder="Employee Info" required>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="responseMessage"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('employeeForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const info = document.getElementById('info').value;
+
+      const response = await fetch('http://YOUR-ALB-DNS/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, price: info })
+      });
+
+      if (response.ok) {
+        responseMessage.innerText = "Employee added successfully!";
+        form.reset();
+      } else {
+        responseMessage.innerText = "Failed to add employee.";
+      }
+    });
+  </script>
+</body>
+</html>
