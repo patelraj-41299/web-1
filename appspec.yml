@@ -2,51 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/app
-    overwrite: yes
+    destination: /var/www/html
 
 hooks:
-  BeforeBlockTraffic:
-    - location: scripts/before_block_traffic.sh
-      timeout: 180
-      runas: ubuntu
-  AfterBlockTraffic:
-    - location: scripts/after_block_traffic.sh
-      timeout: 180
-      runas: ubuntu
-  ApplicationStop:
-    - location: scripts/application_stop.sh
-      timeout: 180
-      runas: ubuntu
-  DownloadBundle:
-    - location: scripts/download_bundle.sh
-      timeout: 180
-      runas: ubuntu
-  BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 180
-      runas: ubuntu
-  Install:
-    - location: scripts/install_dependencies.sh
-      timeout: 180
-      runas: ubuntu
   AfterInstall:
-    - location: scripts/after_install.sh
-      timeout: 180
-      runas: ubuntu
-  ApplicationStart:
-    - location: scripts/start_server.sh
-      timeout: 180
-      runas: ubuntu
-  ValidateService:
-    - location: scripts/validate_service.sh
-      timeout: 180
-      runas: ubuntu
-  BeforeAllowTraffic:
-    - location: scripts/before_allow_traffic.sh
-      timeout: 180
-      runas: ubuntu
-  AfterAllowTraffic:
-    - location: scripts/after_allow_traffic.sh
-      timeout: 180
-      runas: ubuntu
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
